@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  postgres_database:
+    image: postgres:10
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: database
+    volumes:
+      - data-db:/var/lib/postgresql/data
+
+  measures-microservice:
+    image: eamquindio/ejemplomeasures-ms:1.0
+    environment:
+      DB_NAME: 'postgres'
+      DB_USER: 'database'
+      DB_PASS: 1234
+      DB_HOST: 'postgres_database'
+      DB_PORT: 5432
+    depends_on:
+        - postgres_database
+  
+  universidad-microservice:
+    image: eamquindio/ejemplouniversidad:v1.0
+    environment:
+      DB_NAME: 'postgres'
+      DB_USER: 'database'
+      DB_PASS: 1234
+      DB_HOST: 'postgres_database'
+      DB_PORT: 5432
+    depends_on:
+        - postgres_database
+  
+  router:
+    image: eamquindio/ejemplonginx:1.0
+    ports: 
+      - 80:80
+    depends_on:
+      - universidad-microservice
+      - measures-microservice
+
+volumes: 
+    data-db:
+
+
+
+  
