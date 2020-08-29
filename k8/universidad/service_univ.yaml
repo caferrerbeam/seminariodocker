@@ -5,11 +5,9 @@ metadata:
   labels:
     app: universidad-ms
 spec:
-  type: NodePort
   selector:
     app: universidad-ms
   ports:
     - protocol: TCP
-      nodePort: 30002
       port: 8080
       targetPort: 8080

@@ -5,11 +5,9 @@ metadata:
   labels:
     app: measures-ms
 spec:
-  type: NodePort
   selector:
     app: measures-ms
   ports:
     - protocol: TCP
-      nodePort: 30003
       port: 3000
       targetPort: 3000
