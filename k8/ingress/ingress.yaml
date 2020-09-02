@@ -5,7 +5,7 @@ metadata:
   labels:
     app: ingress-router
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: ingress-router
   ports:
