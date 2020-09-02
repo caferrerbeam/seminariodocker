@@ -34,11 +34,8 @@ spec:
               key: db_password
         volumeMounts:
         - mountPath: /var/lib/postgresql/data
-          name: postgres-volume
+          name: postgres-volume-mount
       volumes:
-      - name: postgres-volume
-        hostPath:
-          # directory location on host
-          path: /Users/caferrerb/eam/volume
-          # this field is optional
-          type: Directory
+      - name: postgres-volume-mount
+        persistentVolumeClaim:
+          claimName: postgres-pvc
