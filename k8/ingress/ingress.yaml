@@ -10,7 +10,7 @@ spec:
     app: ingress-router
   ports:
     - protocol: TCP
-      nodePort: 30005
+      nodePort: 30001
       port: 80
       targetPort: 80
 ---
