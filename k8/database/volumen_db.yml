@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
-    pdName: pg-data-disk
+    pdName: cluster-disk
     fsType: ext4
 ---
 apiVersion: v1
