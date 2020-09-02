@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: ingress-router
-        image: ingress-seminario:1.0   
+        image: eamquindio/ingress-seminario:1.0   
         ports:
         - name: http
           containerPort: 80
