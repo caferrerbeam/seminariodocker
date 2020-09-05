@@ -11,7 +11,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   gcePersistentDisk:
-    pdName: cluster-disk
+    pdName: disco-camilo
     fsType: ext4
 ---
 apiVersion: v1
