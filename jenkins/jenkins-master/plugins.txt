@@ -50,3 +50,9 @@ pipeline-stage-step
 blueocean
 blueocean-autofavorite
 gitlab-plugin
+kubernetes-client-api
+kubernetes-credentials
+kubernetes
+oauth-credentials
+google-oauth-plugin
+google-kubernetes-engine
