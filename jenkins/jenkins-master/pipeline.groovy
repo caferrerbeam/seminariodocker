@@ -12,7 +12,7 @@ pipeline {
          stage("Checkout deploy-code") {
             steps {
                dir('deploy') {
-                    git url:"https://github.com/caferrerbeam/seminariodocker.git" , branch: "master"
+                    git url:"https://github.com/caferrerbeam/seminariodocker.git" , branch: "jenkins"
                 } 
             }
         }
@@ -35,5 +35,18 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            steps{
+                step([$class: 'KubernetesEngineBuilder', 
+                        projectId: "nice-root-288300",
+                        clusterName: "cluster-camilo",
+                        zone: "us-west1-a",
+                        manifestPattern: 'deploy/k8/estudiantes/',
+                        credentialsId: "seminario",
+                        verifyDeployments: true])
+            }
+        }
+
     }
 }
