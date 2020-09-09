@@ -6,6 +6,7 @@ pipeline {
      DEPLOY_FOLDER="deploy/k8/parametrized/${project}/"
      DEPLOY_FILE="${env.DEPLOY_FOLDER}deployment.yaml"
    }
+   
     agent any
     stages {
         stage("Checkout app-code") {
