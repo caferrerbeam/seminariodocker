@@ -1,10 +1,18 @@
 pipeline {
+    environment {
+     TAG="${version}_${env.BUILD_ID}"
+     DOCKER_IMAGE="eamquindio/${project}:${env.TAG}"
+     GIT_REPO="https://github.com/caferrerbeam/${project}.git"
+     DEPLOY_FOLDER="deploy/k8/parametrized/${project}/"
+     DEPLOY_FILE="${env.DEPLOY_FOLDER}/deployment.yaml"
+   }
+
     agent any
     stages {
         stage("Checkout app-code") {
             steps {
                dir('app') {
-                    git url:"https://github.com/caferrerbeam/estudiantes-ms" , branch: "develop"
+                    git url:"${env.GIT_REPO}" , branch: "${version}"
                 } 
             }
         }
@@ -21,7 +29,7 @@ pipeline {
             steps {
                 dir('app') {
                     script {
-                        dockerImage = docker.build("eamquindio/estudiante-ms:1.0")
+                        dockerImage = docker.build("${env.DOCKER_IMAGE}")
                     }
                 }
             }
@@ -38,11 +46,14 @@ pipeline {
 
         stage('Deploy') {
             steps{
+
+                sh "sed -i 's/TAG/${env.DOCKER_IMAGE}/g' ${env.DEPLOY_FILE}"
+
                 step([$class: 'KubernetesEngineBuilder', 
                         projectId: "nice-root-288300",
                         clusterName: "cluster-camilo",
                         zone: "us-west1-a",
-                        manifestPattern: 'deploy/k8/estudiantes/',
+                        manifestPattern: "${env.DEPLOY_FOLDER}",
                         credentialsId: "seminario",
                         verifyDeployments: true])
             }
