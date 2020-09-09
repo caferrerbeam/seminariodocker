@@ -1,7 +1,7 @@
 pipeline {
     environment {
      TAG="${version}_${env.BUILD_ID}"
-     DOCKER_IMAGE="eamquindio/${project}:${env.TAG}"
+     DOCKER_IMAGE="eamquindio/${project}"
      GIT_REPO="https://github.com/caferrerbeam/${project}.git"
      DEPLOY_FOLDER="deploy/k8/parametrized/${project}/"
      DEPLOY_FILE="${env.DEPLOY_FOLDER}deployment.yaml"
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 dir('app') {
                     script {
-                        dockerImage = docker.build("${env.DOCKER_IMAGE}")
+                        dockerImage = docker.build("${env.DOCKER_IMAGE}:${env.TAG}")
                     }
                 }
             }
@@ -47,7 +47,9 @@ pipeline {
         stage('Deploy') {
             steps{
 
-                sh "sed -i 's:#!DOCKER_IMAGE:#!${env.DOCKER_IMAGE}:g' ${env.DEPLOY_FILE}"
+                sh "sed -i 's:DOCKER_IMAGE:${env.DOCKER_IMAGE}:g' ${env.DEPLOY_FILE}"
+                sh "sed -i 's:TAG:${env.TAG}:g' ${env.DEPLOY_FILE}"
+
                 step([$class: 'KubernetesEngineBuilder', 
                         projectId: "nice-root-288300",
                         clusterName: "cluster-camilo",
