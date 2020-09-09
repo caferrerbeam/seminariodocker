@@ -47,7 +47,7 @@ pipeline {
         stage('Deploy') {
             steps{
 
-                sh "sed -i 's/TAG/${env.DOCKER_IMAGE}/g' ${env.DEPLOY_FILE}"
+                sh "sed -i 's/DOCKER_IMAGE/${env.DOCKER_IMAGE}/g' ${env.DEPLOY_FILE}"
 
                 step([$class: 'KubernetesEngineBuilder', 
                         projectId: "nice-root-288300",
