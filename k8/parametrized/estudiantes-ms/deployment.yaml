@@ -17,6 +17,7 @@ spec:
       containers:
       - name: estudiantes-ms
         image: DOCKER_IMAGE
+        imagePullPolicy: always
         ports:
         - containerPort: 8080
         env:
