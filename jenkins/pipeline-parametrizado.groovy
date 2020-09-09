@@ -4,7 +4,7 @@ pipeline {
      DOCKER_IMAGE="eamquindio/${project}:${env.TAG}"
      GIT_REPO="https://github.com/caferrerbeam/${project}.git"
      DEPLOY_FOLDER="deploy/k8/parametrized/${project}/"
-     DEPLOY_FILE="${env.DEPLOY_FOLDER}/deployment.yaml"
+     DEPLOY_FILE="${env.DEPLOY_FOLDER}deployment.yaml"
    }
 
     agent any
