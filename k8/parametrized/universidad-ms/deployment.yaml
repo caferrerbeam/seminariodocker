@@ -17,7 +17,7 @@ spec:
       containers:
       - name: universidad-ms
         image: DOCKER_IMAGE:TAG
-        imagePullPolicy: always
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
