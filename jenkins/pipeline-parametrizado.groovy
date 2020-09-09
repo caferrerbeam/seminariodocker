@@ -6,7 +6,7 @@ pipeline {
      DEPLOY_FOLDER="deploy/k8/parametrized/${project}/"
      DEPLOY_FILE="${env.DEPLOY_FOLDER}deployment.yaml"
    }
-   
+
     agent any
     stages {
         stage("Checkout app-code") {
@@ -48,7 +48,6 @@ pipeline {
             steps{
 
                 sh "sed -i 's/DOCKER_IMAGE/${env.DOCKER_IMAGE}/g' ${env.DEPLOY_FILE}"
-
                 step([$class: 'KubernetesEngineBuilder', 
                         projectId: "nice-root-288300",
                         clusterName: "cluster-camilo",
