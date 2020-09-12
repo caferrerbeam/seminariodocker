@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: universidad-ms
-        image: eamquindio/ejemplouniversidad:v1.0
+        image: eamquindio/universidad-ms:v1.0
         ports:
         - containerPort: 8080
         env:
