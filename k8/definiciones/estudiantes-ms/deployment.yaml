@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: measures-ms-deploy
+  name: estudiantes-ms-deploy
   labels:
-    app: measures-ms
+    app: estudiantes-ms
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: measures-ms
+      app: estudiantes-ms
   template:
     metadata:
       labels:
-        app: measures-ms
+        app: estudiantes-ms
     spec:
       containers:
-      - name: measures-ms
-        image: eamquindio/ejemplomeasures-ms:1.0
+      - name: estudiantes-ms
+        image: DOCKER_IMAGE:TAG
         ports:
         - containerPort: 8080
         env:
